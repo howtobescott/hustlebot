@@ -10,7 +10,7 @@ const {spawn} = require('child_process');
 const app = Express();
 const port = 42806;
 const bot = new Discord.Client();
-const token = 'NzIxMTk5NDY2MzE2NTYyNDQy.XuRFvw.rZEFuz1UsOx5HWLQfIvaoICTq0c';
+const token = 'Token';
 const PREFIX = "#";
 
 function generateQuote() {
@@ -29,6 +29,9 @@ function generateQuote() {
                 });
         })
 }
+
+
+
 
 bot.on('ready', () => {
         console.log('Bot Online!');
