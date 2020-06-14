@@ -4,51 +4,37 @@
  * @date 2020-06-12
  */
 
+ //Discord configs
 const Discord = require('discord.js');
-const Express = require('express');
-const {spawn} = require('child_process');
-const app = Express();
-const port = 42806;
 const bot = new Discord.Client();
-const token = 'Token';
+const token = '';
 const PREFIX = "#";
 
-function generateQuote() {
-        app.get('/', (req, res) => {
-                var quote;
-                const python = spawn('python', ['scrape.py']);
+//Server configs
+const spawn = require('child_process').spawn;
+const python = spawn('python', ['scrape.py']);
 
-                python.stdout.on('data', function (data) {
-                        console.log('Retrieving quote from python script....');
-                        quote = data.toString();
-                });
-
-                python.on('close', (code) => {
-                        console.log('Closing');
-                        res.send(quote);
-                });
-        })
-}
-
-
-
+python.stdout.on('data', data => {
+        console.log(data.toString());
+});
 
 bot.on('ready', () => {
-        console.log('Bot Online!');
-})
+        console.log('Bot Online!'); 
+});
 
 bot.on('message', message => {
         let args = message.content.substring(PREFIX.length).split(" ");
         
-        if (message.content === "what time is it?") {
-                message.reply("Grind O'Clock");
+        if (message.content === "testing") {
+                message.channel.send(quote);
+   
         }
 
         switch (args[0]) {
                 case 'hustle':
-                        message.channel.send('')
+                        message.channel.send(quote)
                 break;        
         }    
-})
+});
 
 bot.login(token);
